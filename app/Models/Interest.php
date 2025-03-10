@@ -13,11 +13,11 @@ class Interest extends Model
 
     public function house()
     {
-        return $this->belongsTo(House::class);
+        return $this->belongsTo(House::class, 'house_id');
     }
 
     public function bank()
     {
-        return $this->belongsTo(Bank::class);
+        return $this->belongsTo(Bank::class, 'bank_id');
     }
 }

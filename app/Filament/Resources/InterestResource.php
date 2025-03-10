@@ -24,6 +24,27 @@ class InterestResource extends Resource
         return $form
             ->schema([
                 //
+                Forms\Components\Select::make('house_id')
+                ->relationship('house', 'name')
+                ->searchable()
+                ->preload()
+                ->required(),
+
+                Forms\Components\Select::make('bank_id')
+                ->relationship('bank', 'name')
+                ->searchable()
+                ->preload()
+                ->required(),
+
+                Forms\Components\TextInput::make('interest')
+                ->required()
+                ->numeric()
+                ->prefix('%'),
+
+                Forms\Components\TextInput::make('duration')
+                ->required()
+                ->numeric()
+                ->prefix('Years'),
             ]);
     }
 
@@ -32,6 +53,14 @@ class InterestResource extends Resource
         return $table
             ->columns([
                 //
+                Tables\Columns\ImageColumn::make('house.thumbnail'),
+
+                Tables\Columns\TextColumn::make('house.name')
+                ->searchable(),
+
+                Tables\Columns\TextColumn::make('bank.name'),
+                Tables\Columns\TextColumn::make('interest'),
+                Tables\Columns\TextColumn::make('duration'),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),

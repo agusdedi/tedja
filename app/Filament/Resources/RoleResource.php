@@ -24,6 +24,9 @@ class RoleResource extends Resource
         return $form
             ->schema([
                 //
+                Forms\Components\TextInput::make('name')
+                ->maxLength(255)
+                ->required(),
             ]);
     }
 
@@ -32,6 +35,8 @@ class RoleResource extends Resource
         return $table
             ->columns([
                 //
+                Tables\Columns\TextColumn::make('name')
+                ->searchable(),
             ])
             ->filters([
                 // Tables\Filters\TrashedFilter::make(),

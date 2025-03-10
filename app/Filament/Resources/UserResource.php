@@ -7,6 +7,7 @@ use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\FormsComponent;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -24,6 +25,34 @@ class UserResource extends Resource
         return $form
             ->schema([
                 //
+                Forms\Components\TextInput::make('name')
+                ->maxLength(255)
+                ->required(),
+
+                Forms\Components\TextInput::make('phone')
+                ->maxLength(255)
+                ->required(),
+
+                Forms\Components\TextInput::make('email')
+                ->maxLength(255)
+                ->email()
+                ->required(),
+
+                Forms\Components\TextInput::make('password')
+                ->helperText('Minimum 9 characters')
+                ->password()
+                ->required()
+                ->minLength(9)
+                ->maxLength(255),
+
+                Forms\Components\Select::make('roles')
+                ->label('Role')
+                ->relationship('roles', 'name')
+                ->required(),
+
+                Forms\Components\FileUpload::make('photo')
+                ->required()
+                ->image(),
             ]);
     }
 
@@ -32,6 +61,10 @@ class UserResource extends Resource
         return $table
             ->columns([
                 //
+                Tables\Columns\ImageColumn::make('photo'),
+
+                Tables\Columns\TextColumn::make('name')
+                ->searchable(),
             ])
             ->filters([
                 // Tables\Filters\TrashedFilter::make(),
