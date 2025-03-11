@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\MortgageRequestResource\Pages;
 use App\Filament\Resources\MortgageRequestResource\RelationManagers;
+use App\Filament\Resources\MortgageRequestResource\RelationManagers\InstallmentsRelationManager;
 use App\Models\MortgageRequest;
 use App\Models\User;
 use Filament\Forms;
@@ -272,6 +273,7 @@ class MortgageRequestResource extends Resource
     {
         return [
             //
+            InstallmentsRelationManager::class,
         ];
     }
 
