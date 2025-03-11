@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('dp_total_amount');
             $table->integer('dp_percentage');
             $table->integer('loan_total_amount');
-            $table->integer('loat_interest_total_amount');
+            $table->integer('loan_interest_total_amount');
             $table->integer('house_price');
             $table->integer('monthly_amount');
             $table->string('status');
