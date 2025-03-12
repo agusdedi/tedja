@@ -20,7 +20,9 @@ class MortgageRequestResource extends Resource
 {
     protected static ?string $model = MortgageRequest::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-inbox-stack';
+
+    protected static ?string $navigationGroup = 'Transactions';
 
     public static function form(Form $form): Form
     {
@@ -259,6 +261,12 @@ class MortgageRequestResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+
+                Tables\Actions\Action::make('download')
+                ->label('Download')
+                ->icon('heroicon-o-arrow-down-tray')
+                ->url(fn (MortgageRequest $record) => asset('storage/' . $record->documents)) // Generates a URL to the file
+                ->openUrlInNewTab(), // Opens the file in a new tab
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
