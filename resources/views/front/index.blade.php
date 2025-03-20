@@ -1,43 +1,7 @@
-<!doctype html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="{{ asset('css/output.css') }}" rel="stylesheet">
-
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-    </head>
-    <body>
-        <nav class="relative w-full flex items-center justify-center px-[75px]">
-            <div class="fixed top-0 flex items-center justify-between w-full max-w-[1130px] rounded-3xl p-4 bg-white mt-[30px] z-30">
-                <a href="{{ route('front.index') }}" class="flex shrink-0">
-                    <img src="{{ asset('assets/images/logos/logo-black.svg') }}" alt="logo">
-                </a>
-                <ul class="flex items-center gap-[30px]">
-                    <li class="group active">
-                        <a href="{{ route('front.index') }}" class="hover:font-bold group-[.active]:font-bold transition-all duration-300">Home</a>
-                    </li>
-                    <li class="group">
-                        <a href="#" class="hover:font-bold group-[.active]:font-bold transition-all duration-300">Browse</a>
-                    </li>
-                    <li class="group">
-                        <a href="#" class="hover:font-bold group-[.active]:font-bold transition-all duration-300">Rewards</a>
-                    </li>
-                    <li class="group">
-                        <a href="#" class="hover:font-bold group-[.active]:font-bold transition-all duration-300">Stories</a>
-                    </li>
-                </ul>
-                <div class="flex items-center gap-3">
-                    <a href="{{ route('login') }}" class="group rounded-full border border-tedja-black py-[14px] px-5 hover:bg-tedja-black flex items-center transition-all duration-300">
-                        <span class="font-semibold transition-all duration-300 group-hover:text-white">Sign In</span>
-                    </a>
-                    <a href="{{ route('register') }}" class="group rounded-full border py-[14px] px-5 flex items-center bg-tedja-green">
-                        <span class="font-semibold">Sign Up</span>
-                    </a>
-                </div>
-            </div>
-        </nav>
+@extends('layouts.master')
+@section('title', 'Tedja Homepage')
+    @section('content')
+        <x-nav-tedja/>
         <header class="relative flex flex-col w-full h-[712px]">
             <div class="absolute w-full h-[650px] overflow-hidden">
                 <img src="{{ asset('assets/images/backgrounds/hero-image.webp') }}" class="object-cover w-full h-full" alt="hero image">
@@ -942,8 +906,12 @@
                 </div>
             </div>
         </section>
+    @endsection
+    @push('after-styles')
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    @endpush
 
-        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-        <script src="{{ asset('js/home.js') }}"></script>
-    </body>
-</html>
+        @push('after-scripts')
+            <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+            <script src="{{ asset('js/home.js') }}"></script>
+        @endpush
