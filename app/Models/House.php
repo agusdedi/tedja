@@ -13,9 +13,19 @@ class House extends Model
 
     // mass assignment
     protected $fillable = [
-        'name', 'slug', 'thumbnail', 'about', 'price', 'bedroom',
-        'bathroom', 'certificate', 'electric', 'land_area',
-        'building_area', 'category_id', 'city_id'
+        'name',
+        'slug',
+        'thumbnail',
+        'about',
+        'price',
+        'bedroom',
+        'bathroom',
+        'certificate',
+        'electric',
+        'land_area',
+        'building_area',
+        'category_id',
+        'city_id'
     ];
 
     public function setNameAttribute($value)

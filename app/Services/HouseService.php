@@ -6,8 +6,9 @@ use App\Models\Category;
 use App\Models\City;
 use App\Models\House;
 
-class HouseService {
-    public function getCategoriesAndCities() 
+class HouseService
+{
+    public function getCategoriesAndCities()
     {
         return [
             'categories' => Category::latest()->get(),

@@ -5,8 +5,9 @@ namespace App\Services;
 use App\Models\Installment;
 use App\Models\MortgageRequest;
 
-class PaymentService {
-    
+class PaymentService
+{
+
     protected $midtransService;
 
     public function __construct(MidtransService $midtransService)
@@ -71,9 +72,9 @@ class PaymentService {
     private function createInstallment(MortgageRequest $mortgageRequest, $grossAmount)
     {
         $lastInstallment = $mortgageRequest->installments()
-        ->where('is_paid', true)
-        ->orderBy('no_of_payment', 'decs')
-        ->first();
+            ->where('is_paid', true)
+            ->orderBy('no_of_payment', 'decs')
+            ->first();
 
         $previousRemainingLoan = $lastInstallment
             ? $lastInstallment->remaining_loan_amount

@@ -7,7 +7,8 @@ use Midtrans\Config;
 use Midtrans\Notification;
 use Midtrans\Snap;
 
-class MidtransService {
+class MidtransService
+{
 
     public function __construct()
     {
@@ -18,7 +19,7 @@ class MidtransService {
         Config::$is3ds = config('midtrans.is3ds');
     }
 
-    public function createSnapToken(array $params) : string
+    public function createSnapToken(array $params): string
     {
         try {
             return Snap::getSnapToken($params);
