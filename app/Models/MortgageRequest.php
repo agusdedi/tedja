@@ -11,14 +11,30 @@ class MortgageRequest extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'user_id', 'house_id', 'interest_id', 'duration', 'house_price', 'bank_name',
-        'interest', 'dp_total_amount', 'dp_percentage', 'loan_total_amount',
-        'loan_interest_total_amount', 'monthly_amount', 'status', 'documents'
+        'user_id',
+        'house_id',
+        'interest_id',
+        'duration',
+        'house_price',
+        'bank_name',
+        'interest',
+        'dp_total_amount',
+        'dp_percentage',
+        'loan_total_amount',
+        'loan_interest_total_amount',
+        'monthly_amount',
+        'status',
+        'documents'
     ];
 
     public function customer()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function interestModel()
+    {
+        return $this->belongsTo(Interest::class, 'interest_id');
     }
 
     public function house()
