@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Search Houses')
+@section('title', 'House Details')
 @section('content')
     <x-nav-tedja />
     <div class="mt-[164px] flex flex-col gap-5 text-center items-center">

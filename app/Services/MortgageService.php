@@ -72,7 +72,7 @@ class MortgageService
             'interest_id' => $details['interest']->id,
             'interest' => $details['interest']->interest,
             'duration' => $details['interest']->duration,
-            'bank_name' => $details['interest']->bank_name,
+            'bank_name' => $details['interest']->bank->name,
             'dp_percentage' => $details['dpPercentage'],
             'house_price' => $details['housePrice'],
             'dp_total_amount' => $details['dpTotalAmount'],
