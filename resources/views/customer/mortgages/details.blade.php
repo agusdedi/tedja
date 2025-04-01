@@ -458,21 +458,79 @@
 
                             </section>
                             <section id="ContainerInstallments" class="pr-5">
-                                <section id="NotAvailable" class="py-[40px] flex justify-center">
-                                    <div class="flex flex-col gap-5 w-[460px] mx-auto">
-                                        <div class="flex flex-col gap-[12px]">
-                                            <h4 class="font-bold text-xl leading-[30px] text-center">Not Available</h4>
-                                            <p class="leading-7 text-center">Status mortgage anda masih dalam proses
-                                                sehingga anda belum dapat melakukan pembayaran installments pada cicilan KPR
-                                                rumah tersebut, mohon bersabar.</p>
+                                @if ($mortgageRequest->status !== 'Approved')
+                                    <section id="NotAvailable" class="py-[40px] flex justify-center">
+                                        <div class="flex flex-col gap-5 w-[460px] mx-auto">
+                                            <div class="flex flex-col gap-[12px]">
+                                                <h4 class="font-bold text-xl leading-[30px] text-center">Not Available</h4>
+                                                <p class="leading-7 text-center">Status mortgage anda masih dalam proses
+                                                    sehingga anda belum dapat melakukan pembayaran installments pada cicilan
+                                                    KPR
+                                                    rumah tersebut, mohon bersabar.</p>
+                                            </div>
+                                            <a href="">
+                                                <div
+                                                    class="bg-tedja-green rounded-full font-semibold w-fit mx-auto py-[14px] px-5">
+                                                    Call Tedja Sales</div>
+                                            </a>
                                         </div>
-                                        <a href="">
-                                            <div
-                                                class="bg-tedja-green rounded-full font-semibold w-fit mx-auto py-[14px] px-5">
-                                                Call Tedja Sales</div>
-                                        </a>
-                                    </div>
-                                </section>
+                                    </section>
+                                @else
+                                    <section id="Available" class="flex flex-col gap-5">
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex flex-col gap-[2px]">
+                                                <h4 class="font-bold text-xl leading-[30px]">Installments Histories</h4>
+                                                <p class="text-sm leading-[21px] text-tedja-secondary">Tedja always make
+                                                    your family comfortable</p>
+                                            </div>
+                                            <a href="{{ route('dashboard.installment.payment', $mortgageRequest) }}">
+                                                <div class="rounded-full py-[14px] px-5 bg-tedja-green font-semibold">Make
+                                                    a New Payment</div>
+                                            </a>
+                                        </div>
+                                        <div class="flex flex-col gap-5">
+
+                                            @forelse ($mortgageRequest->installments as $installment)
+                                                <div
+                                                    class="flex items-center justify-between p-[10px] rounded-[30px] border border-[#F2F2F4]">
+                                                    <div class="flex items-center gap-[54px]">
+                                                        <img src="{{ asset('assets/images/icons/crown-blue-fill.svg') }}"
+                                                            alt="icon" class="size-[60px] shrink-0">
+                                                        <div class="flex flex-col gap-[2px]">
+                                                            <h5 class="text-sm leading-[21px] text-tedja-secondary">Grand
+                                                                Total
+                                                            </h5>
+                                                            <strong class="font-bold">Rp
+                                                                {{ number_format($installment->grand_total_amount, 0, '', '.') }}</strong>
+                                                        </div>
+                                                    </div>
+                                                    <span
+                                                        class="font-semibold text-[#FAFAFA] rounded-full bg-tedja-blue px-[10px] py-[6px]">Settlement</span>
+                                                    <div class="flex flex-col gap-[2px]">
+                                                        <h5 class="text-sm leading-[21px] text-tedja-secondary">Payment
+                                                        </h5>
+                                                        <strong class="font-bold">Payment of
+                                                            {{ $installment->no_of_payment }}</strong>
+                                                    </div>
+                                                    <div class="flex flex-col gap-[2px]">
+                                                        <h5 class="text-sm leading-[21px] text-tedja-secondary">Date</h5>
+                                                        <strong
+                                                            class="font-bold">{{ $installment->created_at->format('d M, Y') }}</strong>
+                                                    </div>
+                                                    <a href="my-mortgages-details-installment.html" class="shrink-0">
+                                                        <div
+                                                            class="rounded-full py-[12px] font-semibold flex justify-center w-[140px] bg-tedja-black text-[#FAFAFA]">
+                                                            Details</div>
+                                                    </a>
+                                                </div>
+                                            @empty
+                                                <p>No installment payment has been made</p>
+                                            @endforelse
+
+                                        </div>
+                                    </section>
+                                @endif
+
                             </section>
                             <section id="ContainerGuidance" class="px-5">
                                 <div class="flex flex-col gap-2">
