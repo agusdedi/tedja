@@ -11,7 +11,7 @@ Route::get('/details/{house:slug}', [FrontController::class, 'details'])->name('
 Route::get('/search', [FrontController::class, 'search'])->name('front.search');
 
 Route::match(['get', 'post'], '/mortgage/interest/payment/midtrans/notification', [DashboardController::class, 'paymentMidtransNotification'])
-->name('front.payment_midtrans_notification');
+    ->name('front.payment_midtrans_notification');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -21,30 +21,29 @@ Route::middleware('auth')->group(function () {
     Route::middleware('role:customer')->group(function () {
 
         Route::get('/dashboard/mortgage/{mortgageRequest}/installment/payment', [DashboardController::class, 'installment_payment'])
-        ->name('dashboard.installment.payment');
-        
+            ->name('dashboard.installment.payment');
+
         Route::post('/dashboard/mortgage/installment/payment', [DashboardController::class, 'paymentStoreMidtrans'])
-        ->name('dashboard.installment.payment_store_midtrans');
-        
+            ->name('dashboard.installment.payment_store_midtrans');
+
         Route::get('/request/mortgage/{interest}', [FrontController::class, 'interest'])
-        ->name('front.interest');
-        
+            ->name('front.interest');
+
         Route::post('/request/mortgage/submitted', [FrontController::class, 'request_interest'])
-        ->name('front.interest.submitted');
-        
+            ->name('front.interest.submitted');
+
         Route::get('/request/success', [FrontController::class, 'request_success'])
-        ->name('front.request_success');
-        
+            ->name('front.request_success');
+
         Route::get('/dashboard/mortgages/', [DashboardController::class, 'index'])
-        ->name('dashboard');
-        
+            ->name('dashboard');
+
         Route::get('/dashboard/mortgage/{mortgageRequest}', [DashboardController::class, 'details'])
-        ->name('dashboard.mortgage.details');
-        
+            ->name('dashboard.mortgage.details');
+
         Route::get('/dashboard/mortgage/installment/{installment}', [DashboardController::class, 'installment_details'])
-        ->name('dashboard.installment.details');
-        
+            ->name('dashboard.installment.details');
     });
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

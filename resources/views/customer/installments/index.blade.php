@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Pay Installment')
+@section('title', 'Installment Detais')
 @section('content')
     <div class="flex min-h-screen">
         <aside class="h-screen min-w-[270px] overflow-y-auto bg-tedja-black text-white [&::-webkit-scrollbar]:hidden">
@@ -180,35 +180,36 @@
                         </li>
                         <li>/</li>
                         <li>
-                            <a href="{{ route('dashboard.mortgage.details', $mortgageRequest) }}">Details</a>
+                            <a
+                                href="{{ route('dashboard.mortgage.details', $installmentDetails->mortgageRequest->id) }}">Details</a>
                         </li>
                         <li>/</li>
                         <li>
-                            <span class="font-bold">Payment</span>
+                            <span class="font-bold">Installment</span>
                         </li>
                     </ol>
                 </nav>
                 <header class="flex flex-col gap-[6px]">
-                    <h1 class="text-[26px] font-bold leading-[39px]">Mortgage Details</h1>
+                    <h1 class="text-[26px] font-bold leading-[39px]">Installment Details</h1>
                     <p class="text-sm leading-[21px] text-tedja-secondary">Tedja always make your family comfortable</p>
                 </header>
                 <div class="flex gap-[30px]">
                     <section id="Hero"
                         class="flex flex-col h-fit gap-[12px] px-[10px] pt-[10px] pb-[20px] w-[357px] shrink-0 rounded-[30px] border border-[#F2F2F4] bg-white">
                         <div class="w-full h-[240px] rounded-[30px] overflow-hidden justify-center items-center">
-                            <img src="{{ Storage::url($mortgageRequest->house->thumbnail) }}" alt="image"
-                                class="object-cover size-full">
+                            <img src="{{ Storage::url($installmentDetails->mortgageRequest->house->thumbnail) }}"
+                                alt="image" class="object-cover size-full">
                         </div>
                         <div class="flex flex-col gap-[18px] px-[10px]">
                             <div class="flex flex-col gap-[6px]">
                                 <h2 class="font-bold text-lg leading-[27px]">
-                                    {{ $mortgageRequest->house->name }}
+                                    {{ $installmentDetails->mortgageRequest->house->name }}
                                 </h2>
                                 <div class="flex items-center gap-[6px]">
                                     <img src="{{ asset('assets/images/icons/location.svg') }}" alt="icon"
                                         class="size-5 shrink-0">
                                     <p class="font-semibold text-sm leading-[21px]">
-                                        {{ $mortgageRequest->house->city->name }}
+                                        {{ $installmentDetails->mortgageRequest->house->city->name }}
                                     </p>
                                 </div>
                             </div>
@@ -217,32 +218,33 @@
                                 <div class="flex items-center gap-[6px] p-[10px] border border-[#F2F2F4] rounded-[14px]">
                                     <img src="{{ asset('assets/images/icons/slider-vertical.svg') }}" alt="icon"
                                         class="shrink-0 size-5">
-                                    <p class="font-semibold text-sm leading-[21px]">{{ $mortgageRequest->house->bedroom }}
+                                    <p class="font-semibold text-sm leading-[21px]">
+                                        {{ $installmentDetails->mortgageRequest->house->bedroom }}
                                         Bedroom</p>
                                 </div>
                                 <div class="flex items-center gap-[6px] p-[10px] border border-[#F2F2F4] rounded-[14px]">
                                     <img src="{{ asset('assets/images/icons/slider-horizontal.svg') }}" alt="icon"
                                         class="shrink-0 size-5">
                                     <p class="font-semibold text-sm leading-[21px]">
-                                        {{ $mortgageRequest->house->bathroom }} Bathroom</p>
+                                        {{ $installmentDetails->mortgageRequest->house->bathroom }} Bathroom</p>
                                 </div>
                                 <div class="flex items-center gap-[6px] p-[10px] border border-[#F2F2F4] rounded-[14px]">
                                     <img src="{{ asset('assets/images/icons/building.svg') }}" alt="icon"
                                         class="shrink-0 size-5">
                                     <p class="font-semibold text-sm leading-[21px]">
-                                        {{ $mortgageRequest->house->building_area }} M²</p>
+                                        {{ $installmentDetails->mortgageRequest->house->building_area }} M²</p>
                                 </div>
                                 <div class="flex items-center gap-[6px] p-[10px] border border-[#F2F2F4] rounded-[14px]">
                                     <img src="{{ asset('assets/images/icons/maximize.svg') }}" alt="icon"
                                         class="shrink-0 size-5">
                                     <p class="font-semibold text-sm leading-[21px]">
-                                        {{ $mortgageRequest->house->land_area }} M²</p>
+                                        {{ $installmentDetails->mortgageRequest->house->land_area }} M²</p>
                                 </div>
                                 <div class="flex items-center gap-[6px] p-[10px] border border-[#F2F2F4] rounded-[14px]">
                                     <img src="{{ asset('assets/images/icons/note-favorite.svg') }}" alt="icon"
                                         class="shrink-0 size-5">
                                     <p class="font-semibold text-sm leading-[21px]">
-                                        {{ $mortgageRequest->house->certificate }}</p>
+                                        {{ $installmentDetails->mortgageRequest->house->certificate }}</p>
                                 </div>
 
 
@@ -250,152 +252,93 @@
                                     <img src="{{ asset('assets/images/icons/flash.svg') }}" alt="icon"
                                         class="shrink-0 size-5">
                                     <p class="font-semibold text-sm leading-[21px]">
-                                        {{ $mortgageRequest->house->electric }} Watts</p>
+                                        {{ $installmentDetails->mortgageRequest->house->electric }} Watts</p>
                                 </div>
                             </div>
                         </div>
                     </section>
-                    <div class="w-full">
-                        <form id="sampleForm" class="flex w-full flex-col gap-[30px]">
-                            @csrf
-                            <section id="KPRPaymentDetails"
-                                class="border border-[#F2F2F4] bg-white !h-fit w-full p-5 rounded-[20px] flex flex-col gap-4">
-                                <div class="flex items-center justify-between">
-                                    <h4 class="font-semibold text-lg leading-[27px]">KPR Payment Details</h4>
-                                    <button type="button" class="shrink-0" data-expand="KPRPaymentDetailsJ">
-                                        <img src="{{ asset('assets/images/icons/arrow-circle-down.svg') }}"
-                                            alt="icon" class="transition-all duration-300 size-6 shrink-0">
-                                    </button>
+                    <section id="KPRPaymentDetails"
+                        class="border bg-white border-[#F2F2F4] !h-fit w-full p-5 rounded-[20px] flex flex-col gap-4">
+                        <h4 class="font-semibold text-lg leading-[27px]">KPR Payment Details</h4>
+                        <hr class="border-[#F2F2F4]">
+                        <div class="flex flex-col gap-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <img src="{{ asset('assets/images/icons/note.svg') }}" alt="icon"
+                                        class="size-6 shrink-0">
+                                    <p>Payment of No</p>
                                 </div>
-                                <div class="flex flex-col gap-4" id="KPRPaymentDetailsJ">
-                                    <hr class="border-[#F2F2F4]">
-                                    <div class="flex flex-col gap-4">
-                                        <div class="flex items-center justify-between">
-                                            <div class="flex items-center gap-2">
-                                                <img src="{{ asset('assets/images/icons/note.svg') }}" alt="icon"
-                                                    class="size-6 shrink-0">
-                                                <p>Remaining Loan</p>
-                                            </div>
-                                            <strong class="font-semibold">Rp
-                                                {{ number_format($remainingLoanAmount, 0, '', '.') }}</strong>
-                                        </div>
-                                        <div class="flex items-center justify-between">
-                                            <div class="flex items-center gap-2">
-                                                <img src="{{ asset('assets/images/icons/note.svg') }}" alt="icon"
-                                                    class="size-6 shrink-0">
-                                                <p>Monthly Payment</p>
-                                            </div>
-                                            <strong class="font-semibold">Rp
-                                                {{ number_format($monthlyPayment, 0, '', '.') }}</strong>
-                                        </div>
-                                        <div class="flex items-center justify-between">
-                                            <div class="flex items-center gap-2">
-                                                <img src="{{ asset('assets/images/icons/note.svg') }}" alt="icon"
-                                                    class="size-6 shrink-0">
-                                                <p>PPN 11%</p>
-                                            </div>
-                                            <strong class="font-semibold">Rp
-                                                {{ number_format($totalTaxAmount, 0, '', '.') }}</strong>
-                                        </div>
-                                        <div class="flex items-center justify-between">
-                                            <div class="flex items-center gap-2">
-                                                <img src="{{ asset('assets/images/icons/note.svg') }}" alt="icon"
-                                                    class="size-6 shrink-0">
-                                                <p>Insurance</p>
-                                            </div>
-                                            <strong class="font-semibold">Rp
-                                                {{ number_format($insurance, 0, '', '.') }}</strong>
-                                        </div>
-                                        <div class="flex items-center justify-between">
-                                            <div class="flex items-center gap-2">
-                                                <img src="{{ asset('assets/images/icons/note.svg') }}" alt="icon"
-                                                    class="size-6 shrink-0">
-                                                <label for="grandTotal" class="text-gray-700 shrink-0">Grand Total
-                                                    Amount</label>
-                                            </div>
-                                            <input type="text" id="grandTotal" name="grandTotal"
-                                                value="Rp {{ number_format($grandTotalAmount, 0, '', '.') }}" readonly
-                                                class="font-bold text-[20px] text-end leading-[30px] text-tedja-blue bg-transparent border-none focus:outline-none" />
-                                        </div>
-                                    </div>
+                                <strong class="font-semibold">Payment of {{ $installmentDetails->no_of_payment }}</strong>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <img src="{{ asset('assets/images/icons/note.svg') }}" alt="icon"
+                                        class="size-6 shrink-0">
+                                    <p>Monthly Payment</p>
                                 </div>
-                            </section>
-                            <section id="MakeAPayment"
-                                class="border bg-white border-[#F2F2F4] !h-fit w-full p-5 rounded-[20px] flex flex-col gap-5">
-                                <h4 class="font-semibold text-lg leading-[27px]">Make a Payment</h4>
-                                <hr class="border-[#F2F2F4]">
-                                <div class="flex items-center gap-[6px] pl-[7px] mx-auto">
-                                    <img src="{{ asset('assets/images/icons/security-safe-blue-fill.svg') }}"
-                                        alt="icon" class="size-6 shrink-0">
-                                    <p class="font-semibold">All your privacy data secured with our system</p>
+                                <strong class="font-semibold">Rp
+                                    {{ number_format($installmentDetails->sub_total_amount, 0, '', '.') }}</strong>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <img src="{{ asset('assets/images/icons/note.svg') }}" alt="icon"
+                                        class="size-6 shrink-0">
+                                    <p>PPN 11%</p>
                                 </div>
-                                <hr class="border-[#F2F2F4]">
-                                <button type="submit" id="pay-button"
-                                    class="bg-tedja-green rounded-full py-[14px] w-full flex justify-center font-semibold">Pay
-                                    Now with Midtrans</button>
-                            </section>
-                        </form>
-                    </div>
+                                <strong class="font-semibold">Rp
+                                    {{ number_format($installmentDetails->total_tax_amount, 0, '', '.') }}</strong>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <img src="{{ asset('assets/images/icons/note.svg') }}" alt="icon"
+                                        class="size-6 shrink-0">
+                                    <p>Insurance</p>
+                                </div>
+                                <strong class="font-semibold">Rp
+                                    {{ number_format($installmentDetails->insurance_amount, 0, '', '.') }}</strong>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <img src="{{ asset('assets/images/icons/note.svg') }}" alt="icon"
+                                        class="size-6 shrink-0">
+                                    <p>Grand Total Amount</p>
+                                </div>
+                                <strong class="font-bold text-[20px] leading-[30px] text-tedja-blue">Rp
+                                    {{ number_format($installmentDetails->grand_total_amount, 0, '', '.') }}</strong>
+                            </div>
+                        </div>
+                        <hr class="border-[#F2F2F4]">
+                        <div class="flex flex-col gap-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <img src="{{ asset('assets/images/icons/note.svg') }}" alt="icon"
+                                        class="size-6 shrink-0">
+                                    <p>Payment Method</p>
+                                </div>
+                                <strong class="font-semibold">Midtrans</strong>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <img src="{{ asset('assets/images/icons/note.svg') }}" alt="icon"
+                                        class="size-6 shrink-0">
+                                    <p>Paid at</p>
+                                </div>
+                                <strong
+                                    class="font-semibold">{{ $installmentDetails->created_at->format('d M, Y') }}</strong>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <img src="{{ asset('assets/images/icons/note.svg') }}" alt="icon"
+                                        class="size-6 shrink-0">
+                                    <p>Payment Status</p>
+                                </div>
+                                <span
+                                    class="font-semibold text-[#FAFAFA] rounded-full bg-tedja-blue px-[10px] py-[6px]">Settlement</span>
+                            </div>
+                        </div>
+                    </section>
                 </div>
             </main>
         </div>
     </div>
-
 @endsection
-
-@push('after-scripts')
-    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
-        data-client-key="{{ config('midtrans.clientKey') }}"></script>
-    <script type="text/javascript">
-        const payButton = document.getElementById('pay-button');
-        payButton.addEventListener('click', function(e) {
-            e.preventDefault();
-            // Fetch the Snap token from your backend
-            fetch('{{ route('dashboard.installment.payment_store_midtrans') }}', {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value
-                    },
-                    body: JSON.stringify({
-                        // Any additional data you want to send with the request
-                        mortgage_request_id: {{ $mortgageRequest->id }},
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.snap_token) {
-                        // Trigger Midtrans Snap payment popup
-                        snap.pay(data.snap_token, {
-                            onSuccess: function(result) {
-                                window.location.href =
-                                    `/dashboard/mortgage/{{ $mortgageRequest->id }}`;
-                            },
-                            onPending: function(result) {
-                                alert('Payment pending!');
-                                window.location.href = "{{ route('dashboard') }}";
-                            },
-                            onError: function(result) {
-                                alert('Payment failed: ' + result.status_message);
-                                window.location.href = "{{ route('dashboard') }}";
-                            },
-                            onClose: function() {
-                                alert('Payment popup closed');
-                                window.location.href = "{{ route('dashboard') }}";
-                            }
-                        });
-                    } else {
-                        alert('Error: ' + data.error);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        });
-    </script>
-
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="{{ asset('js/jquery.js') }}"></script>
-    <script src="{{ asset('js/navbar-dropdown.js') }}"></script>
-@endpush
